@@ -5,8 +5,15 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": false,
-    "outDir": "dist"
+    "outDir": "dist",
+    "target": "ES2015"
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "src/scripts/**/*"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "src/scripts/**/*"
+  ]
 }

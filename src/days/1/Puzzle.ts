@@ -18,7 +18,7 @@ export default class ConcretePuzzle extends Puzzle {
       }
     });
 
-    return 'day 1 solution 1: ' + maxTotalCalories;
+    return `day 1 solution 1: ${maxTotalCalories}`;
   }
   public solveSecond(): string {
     const calories = this.input
@@ -37,16 +37,15 @@ export default class ConcretePuzzle extends Puzzle {
     });
 
     elvesCalories = elvesCalories.sort((a, b) => b - a);
-    return (
-      'day 1 solution 2: ' +
-      (elvesCalories[0] + elvesCalories[1] + elvesCalories[2])
-    );
+    return `day 1 solution 2: ${
+      elvesCalories[0] + elvesCalories[1] + elvesCalories[2]
+    }`;
   }
 
   public getFirstExpectedResult(): string {
-    return 'day 1 solution 1: xxxxx';
+    return 'day 1 solution 1: 75501';
   }
   public getSecondExpectedResult(): string {
-    return 'day 1 solution 2: xxxxxx';
+    return 'day 1 solution 2: 215594';
   }
 }
