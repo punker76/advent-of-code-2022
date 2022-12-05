@@ -28,11 +28,23 @@ export default class ConcretePuzzle extends Puzzle {
 
   public solveSecond(): string {
     // WRITE SOLUTION FOR TEST 2
-    return 'day 4 solution 2';
+    const allPairs = this.input.trim().split('\n');
+
+    const result = allPairs
+      .map((p) => {
+        const [p1, p2] = p.split(',');
+        const [p1From, p1To] = p1.split('-').map((n) => +n);
+        const [p2From, p2To] = p2.split('-').map((n) => +n);
+
+        return +(p1From <= p2To && p1To >= p2From);
+      })
+      .reduce((p, c) => p + c);
+
+    return `day 4 solution 2: ${result}`;
   }
 
   public getSecondExpectedResult(): string {
     // RETURN EXPECTED SOLUTION FOR TEST 2;
-    return 'day 4 solution 2';
+    return 'day 4 solution 2: 905';
   }
 }
