@@ -19,11 +19,17 @@ export default class ConcretePuzzle extends Puzzle {
 
   public solveSecond(): string {
     // WRITE SOLUTION FOR TEST 2
-    return 'day 6 solution 2';
+    const datastream = [...this.input.trim()];
+
+    const result = datastream.findIndex((_value, index, array) => {
+      return index > 13 && new Set(array.slice(index - 14, index)).size === 14;
+    });
+
+    return `day 6 solution 2: ${result}`;
   }
 
   public getSecondExpectedResult(): string {
     // RETURN EXPECTED SOLUTION FOR TEST 2;
-    return 'day 6 solution 2';
+    return 'day 6 solution 2: 2851';
   }
 }
