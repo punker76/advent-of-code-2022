@@ -1,14 +1,23 @@
 import Puzzle from '../../types/AbstractPuzzle';
 
 export default class ConcretePuzzle extends Puzzle {
-  public solveFirst(): string {
-    // WRITE SOLUTION FOR TEST 1
+  private getFirstMarker(messageLength: number): number {
     const datastream = [...this.input.trim()];
 
     const result = datastream.findIndex((_value, index, array) => {
-      return index > 3 && new Set(array.slice(index - 4, index)).size === 4;
+      return (
+        index > messageLength - 1 &&
+        new Set(array.slice(index - messageLength, index)).size ===
+          messageLength
+      );
     });
 
+    return result;
+  }
+
+  public solveFirst(): string {
+    // WRITE SOLUTION FOR TEST 1
+    const result = this.getFirstMarker(4);
     return `day 6 solution 1: ${result}`;
   }
 
@@ -19,12 +28,7 @@ export default class ConcretePuzzle extends Puzzle {
 
   public solveSecond(): string {
     // WRITE SOLUTION FOR TEST 2
-    const datastream = [...this.input.trim()];
-
-    const result = datastream.findIndex((_value, index, array) => {
-      return index > 13 && new Set(array.slice(index - 14, index)).size === 14;
-    });
-
+    const result = this.getFirstMarker(14);
     return `day 6 solution 2: ${result}`;
   }
 
