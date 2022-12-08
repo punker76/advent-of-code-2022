@@ -26,12 +26,7 @@ class Directory implements IDirectoryElement {
   }
 
   get size(): number {
-    return (
-      this.content
-        // .filter((c) => c instanceof File)
-        .map((c) => c.size)
-        .reduce((c, p) => c + p, 0)
-    );
+    return this.content.map((c) => c.size).reduce((c, p) => c + p, 0);
   }
 
   public getMost(most: number): number {
@@ -46,11 +41,21 @@ class Directory implements IDirectoryElement {
       .reduce((c, p) => c + p, 0);
     return result;
   }
+
+  public getDir2Delete(dirs: IDirectoryElement[]): void {
+    dirs.splice(
+      dirs.length,
+      0,
+      ...this.content.filter((c) => c instanceof Directory)
+    );
+    this.content
+      .filter((c) => c instanceof Directory)
+      .forEach((d) => (d as Directory).getDir2Delete(dirs));
+  }
 }
 
 export default class ConcretePuzzle extends Puzzle {
-  public solveFirst(): string {
-    // WRITE SOLUTION FOR TEST 1
+  private getDirectory(): Directory {
     const terminalOutput = this.input.trim().split('\n');
     console.log(terminalOutput);
 
@@ -99,6 +104,13 @@ export default class ConcretePuzzle extends Puzzle {
       }
     });
 
+    return rootDir;
+  }
+
+  public solveFirst(): string {
+    // WRITE SOLUTION FOR TEST 1
+    const rootDir = this.getDirectory();
+
     console.log('Root size', rootDir.size);
 
     const result = rootDir.getMost(100000);
@@ -113,11 +125,25 @@ export default class ConcretePuzzle extends Puzzle {
 
   public solveSecond(): string {
     // WRITE SOLUTION FOR TEST 2
-    return 'day 7 solution 2';
+    const rootDir = this.getDirectory();
+
+    console.log('Root size', rootDir.size);
+    const unused = 70000000 - rootDir.size;
+    console.log('Unused size', unused);
+
+    const dirs: Directory[] = [];
+    rootDir.getDir2Delete(dirs);
+    const result = dirs
+      .sort((a, b) => b.size - a.size)
+      .filter((d) => d.size + unused > 30000000)
+      .map((d) => d.size)
+      .pop();
+
+    return `day 7 solution 2: ${result}`;
   }
 
   public getSecondExpectedResult(): string {
     // RETURN EXPECTED SOLUTION FOR TEST 2;
-    return 'day 7 solution 2';
+    return 'day 7 solution 2: 10475598';
   }
 }
