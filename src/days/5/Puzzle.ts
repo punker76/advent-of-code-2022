@@ -33,12 +33,8 @@ export default class ConcretePuzzle extends Puzzle {
     moves.forEach((m) => {
       // console.log(m);
 
-      const moveRegEx = new RegExp(
-        'move (?<count>\\d+) from (?<from>\\d+) to (?<to>\\d+)',
-        'g'
-      );
-
-      const moveInstruction = moveRegEx.exec(m);
+      const moveInstruction =
+        /move (?<count>\d+) from (?<from>\d+) to (?<to>\d+)/g.exec(m);
       const count = +moveInstruction?.groups?.count;
       const from = +moveInstruction?.groups?.from;
       const to = +moveInstruction?.groups?.to;
@@ -94,12 +90,8 @@ export default class ConcretePuzzle extends Puzzle {
     moves.forEach((m) => {
       // console.log(m);
 
-      const moveRegEx = new RegExp(
-        'move (?<count>\\d+) from (?<from>\\d+) to (?<to>\\d+)',
-        'g'
-      );
-
-      const moveInstruction = moveRegEx.exec(m);
+      const moveInstruction =
+        /move (?<count>\d+) from (?<from>\d+) to (?<to>\d+)/g.exec(m);
       const count = +moveInstruction?.groups?.count;
       const from = +moveInstruction?.groups?.from;
       const to = +moveInstruction?.groups?.to;
